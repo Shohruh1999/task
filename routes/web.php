@@ -15,10 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // if (auth()->user()->role_id == 1){
+    //     return redirect(to:'/maneger');
+    // }
+    return redirect(to:'/dashboard');//view('welcome');
 })->middleware('auth');
 Route::get('/maneger', function () {
-    return'salom'; })->name('maneger');
+    return view('maneger-dashboard'); })->name('maneger');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
