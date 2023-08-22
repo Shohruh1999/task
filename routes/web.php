@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware('auth');
 Route::get('/maneger', function () {
-    return'salom'; });
+    return'salom'; })->name('maneger');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
