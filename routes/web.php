@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,18 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // if (auth()->user()->role_id == 1){
-    //     return redirect(to:'/maneger');
-    // }
-    return redirect(to:'/dashboard');//view('welcome');
-})->middleware('auth');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [MainController::class, 'main'])->name('main');
+    Route::get('/dashboard', [MainController::class, 'dashboard'])->name('dashboard');
+    Route::resource('/applications', ApplicationController::class);
+});
 Route::get('/maneger', function () {
-    return view('maneger-dashboard'); })->name('maneger');
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-Route::resource( '/applications', ApplicationController::class);
+    return view('maneger-dashboard');
+})->name('maneger');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -34,4 +33,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

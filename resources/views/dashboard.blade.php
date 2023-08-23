@@ -11,46 +11,15 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     @if (auth()->user()->role->name == 'manager')
-                        <span class="text-blue-500 font-bold text-xl">Received Applications</span>
+
+
+                    <span class="text-blue-500 font-bold text-xl">Received Applications</span>
                         <!-- component -->
                         <!-- component -->
                         <!-- This is an example component -->
-                        <div class='mt-5'>
-                            <div class="rounded-xl border p-5 shadow-md w-9/12 bg-white">
-                                <div class="flex w-full items-center justify-between border-b pb-3">
-                                    <div class="flex items-center space-x-3">
-                                        <div
-                                            class="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]">
-                                        </div>
-                                        <div class="text-lg font-bold text-slate-700">Joe Smith</div>
-                                    </div>
-                                    <div class="flex items-center space-x-8">
-                                        <button
-                                            class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">id:
-                                            5</button>
-                                        <div class="text-xs text-neutral-500">2 hours ago</div>
-                                    </div>
-                                </div>
 
-                                <div class="mt-4 mb-6">
-                                    <div class="mb-3 text-xl font-bold">Nulla sed leo tempus, feugiat velit vel, rhoncus
-                                        neque?</div>
-                                    <div class="text-sm text-neutral-600">Aliquam a tristique sapien, nec bibendum urna.
-                                        Maecenas convallis dignissim turpis, non suscipit mauris interdum at. Morbi sed
-                                        gravida nisl, a pharetra nulla. Etiam tincidunt turpis leo, ut mollis ipsum
-                                        consectetur quis. Etiam faucibus est risus, ac condimentum mauris consequat nec.
-                                        Curabitur eget feugiat massa</div>
-                                </div>
+                    @foreach ($applications as $application)
 
-                                <div>
-                                    <div class="flex items-center justify-between text-slate-500">
-                                        <div class="flex space-x-4 md:space-x-8 mb-3">
-                                            shohruhegamberdiyev9@gmail.com
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class='mt-5'>
                             <div class="rounded-xl border p-5 shadow-md w-9/12 bg-white">
@@ -59,35 +28,36 @@
                                         <div
                                             class="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]">
                                         </div>
-                                        <div class="text-lg font-bold text-slate-700">Joe Smith</div>
+                                        <div class="text-lg font-bold text-slate-700">{{$application->user->name}}</div>
                                     </div>
                                     <div class="flex items-center space-x-8">
                                         <button
-                                            class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">id:
-                                            5</button>
-                                        <div class="text-xs text-neutral-500">2 hours ago</div>
+                                            class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">
+                                           № {{$application->id}}
+                                        </button>
+                                        <div class="text-xs text-neutral-500">{{$application->created_at}}</div>
                                     </div>
                                 </div>
 
                                 <div class="mt-4 mb-6">
-                                    <div class="mb-3 text-xl font-bold">Nulla sed leo tempus, feugiat velit vel, rhoncus
-                                        neque?</div>
-                                    <div class="text-sm text-neutral-600">Aliquam a tristique sapien, nec bibendum urna.
-                                        Maecenas convallis dignissim turpis, non suscipit mauris interdum at. Morbi sed
-                                        gravida nisl, a pharetra nulla. Etiam tincidunt turpis leo, ut mollis ipsum
-                                        consectetur quis. Etiam faucibus est risus, ac condimentum mauris consequat nec.
-                                        Curabitur eget feugiat massa</div>
+                                    <div class="mb-3 text-xl font-bold">{{$application->subject }}</div>
+                                    <div class="text-sm text-neutral-600">{{$application->message}}</div>
                                 </div>
 
                                 <div>
                                     <div class="flex items-center justify-between text-slate-500">
                                         <div class="flex space-x-4 md:space-x-8 mb-3">
-                                            shohruhegamberdiyev9@gmail.com
+                                            {{$application->user->email}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    @endforeach
+
+
+                    {{ $applications->links() }}
+
                     @else
                         user
 

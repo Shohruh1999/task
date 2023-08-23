@@ -9,7 +9,9 @@ class ApplicationController extends Controller
 {
     public function store(Request $request)
     {
-        //dd($request);
+        //if ()
+        // $day = auth()->user()->applications->created_at;
+        // dd($day);
         $request->validate([
             'subject' => 'required | max: 255',
             'message' => 'required',
@@ -17,7 +19,6 @@ class ApplicationController extends Controller
         $name = null;
         if ($request->hasFile('file')){
            $validate = $request->validate(['file' => 'file|mimes:pdf,jpg,jpeg|max: 4000']);
-           dd($validate);
             $file = $request->file('file');
             $name = $file->getClientOriginalName();
             $path = $request->file('file')->storeAs(
@@ -28,6 +29,7 @@ class ApplicationController extends Controller
             //$file->move(public_path().'/uploads/', $name);
         }
        $application = Application::create([
+            'user_id' => auth()->user()->id,
           'subject' => $request->subject,
           'message' => $request->message,
             'file_url' => $path ?? null
