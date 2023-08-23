@@ -11,26 +11,28 @@ class ApplicationController extends Controller
     {
         //dd($request);
         $request->validate([
-            'subject' => 'required',
+            'subject' => 'required | max: 255',
             'message' => 'required',
         ]);
         $name = null;
         if ($request->hasFile('file')){
+           $validate = $request->validate(['file' => 'file|mimes:pdf,jpg,jpeg|max: 4000']);
+           dd($validate);
             $file = $request->file('file');
             $name = $file->getClientOriginalName();
-
+            $path = $request->file('file')->storeAs(
+                'files',
+                $name,
+                'public'
+            );
             //$file->move(public_path().'/uploads/', $name);
         }
-        Application::create([
+       $application = Application::create([
           'subject' => $request->subject,
           'message' => $request->message,
-            'file' => $name,
+            'file_url' => $path ?? null
         ]);
-
-        // Application::create([
-
-        // ]);
-
+        return redirect()->back();
     }
     //
 }

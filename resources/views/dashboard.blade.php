@@ -102,7 +102,7 @@
 
                                         <hr class="my-6">
                                         <label class="uppercase text-sm font-bold opacity-70">Subject</label>
-                                        <input type="text" name="subject"
+                                        <input type="text" name="subject" required
                                             class="p-3 mt-2 mb-4 w-full bg-slate-200 rounded border-2 border-slate-200 focus:border-slate-600 focus:outline-none">
                                         <label class="uppercase text-sm font-bold opacity-70">Message</label>
                                         <textarea rows="5" name="message"
