@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ApplicationRequest;
 use App\Jobs\SendEmailJob;
 use App\Mail\ApplicationCreated;
 use App\Models\Application;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
-    public function store(Request $request)
+    public function store(ApplicationRequest $request)
     {
         $day = Carbon::now()->format('Y-m-d');
 
@@ -25,13 +26,8 @@ class ApplicationController extends Controller
                 return redirect()->back()->with('error', 'You have already applied for this day');
             }
         }
-        $request->validate([
-            'subject' => 'required | max: 255',
-            'message' => 'required',
-        ]);
         $name = null;
         if ($request->hasFile('file')){
-           $validate = $request->validate(['file' => 'file|mimes:pdf,jpg,jpeg|max: 4000']);
             $file = $request->file('file');
             $name = $file->getClientOriginalName();
             $path = $request->file('file')->storeAs(

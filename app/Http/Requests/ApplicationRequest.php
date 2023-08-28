@@ -11,7 +11,7 @@ class ApplicationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class ApplicationRequest extends FormRequest
         return [
             'subject' => 'required | max: 255',
             'message' => 'required',
-            //
+            'file' => 'file|mimes:pdf,jpg,jpeg|max: 4000',
         ];
     }
 
