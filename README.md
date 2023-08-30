@@ -13,8 +13,13 @@ Bu loyiha client va menejerni bir biriga bog'laydi. Loyiha Quyidagi qismlardan t
 ```
 cp .env.example .env
 ```
+
 ```
-composer intall
+composer intall 
+```
+```or```
+```
+ composer install --ignore-platform-reqs
 ```
 ```
 npm install
