@@ -10,24 +10,9 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    @if (session()->has('error'))
-                        <div class="bg-red-100 border-t-4 border-teal-500 rounded-b text-teal-900 mb-4 px-4 py-3 shadow-md"
-                            role="alert">
-                            <div class="flex">
-                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path
-                                            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-                                    </svg></div>
-                                <div>
-                                    <p class="font-bold">{{ session()->get('error') }}</p>
+                    
 
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    @if (auth()->user()->role->name == 'manager')
+                    
 
 
                         <span class="text-blue-500 font-bold text-xl">Received Applications</span>
@@ -93,15 +78,7 @@
 
                                         </div>
                                     </div>
-                                   @if (! $application->answer()->exists() && $application->answer()->count()==0  )
-                                       
-                                   
-                                    <div class="flex justify-end">
-                                        <a href="{{route('answer.create',['application'=>$application->id])}}" type="button" class="text-green-500 cursor-pointer hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
-                                            Answer
-                                        </a>
-                                    </div>
-                                    @else
+                                   @if ( $application->answer()->exists())
                                         <hr>
                                         <div class="flex justify-center">
                                             <p class=" text-lg"><b>Answer: </b> {{$application->answer->body}}</p>
@@ -115,40 +92,7 @@
 
 
                         {{ $applications->links() }}
-                    @else
-                        <div class='flex items-center '>
-                            <div class='w-full max-w-lg px-10 py-8 mx-auto bg-white rounded-lg shadow-xl'>
-                                <div class='max-w-md mx-auto space-y-6'>
-
-                                    <form action="{{ route('applications.store') }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <h2 class="text-2xl font-bold ">Submit your application</h2>
-
-                                        <hr class="my-6">
-                                        <label class="uppercase text-sm font-bold opacity-70">Subject</label>
-                                        <input type="text" name="subject" required
-                                            class="p-3 mt-2 mb-4 w-full bg-slate-200 rounded border-2 border-slate-200 focus:border-slate-600 focus:outline-none">
-                                        <label class="uppercase text-sm font-bold opacity-70">Message</label>
-                                        <textarea rows="5" name="message" class="mt-2 mb-4 w-full bg-slate-200 rounded"> </textarea>
-                                        <label class="uppercase text-sm font-bold opacity-70">File</label>
-                                        <input type="file" name="file"
-                                            class="p-3 mt-2 mb-4 w-full bg-slate-200 rounded border-2 border-slate-200 focus:border-slate-600 focus:outline-none">
-                                        <div class="my-2 font-medium opacity-70">
-                                            <input type="checkbox">
-                                            Subscribe and follow company updates.
-                                        </div>
-
-                                        <input type="submit"
-                                            class="py-3 px-6 my-2 bg-emerald-500 text-white font-medium rounded hover:bg-indigo-500 cursor-pointer ease-in-out duration-300"
-                                            value="Send">
-
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    @endif
+                    
                 </div>
             </div>
         </div>

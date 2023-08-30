@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
+    public function index()
+    {
+        if(! auth()->user()->applications()->exists()){
+            return redirect()->route('dashboard')->with('error', 'You are not applications');
+        }
+        $applications = auth()->user()->applications()->latest()->paginate(5);
+        return view('applications.index', compact('applications'));
+    }
     public function store(ApplicationRequest $request)
     {
         $day = Carbon::now()->format('Y-m-d');
