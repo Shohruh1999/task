@@ -31,7 +31,7 @@ php artisan key:generate
 ```
 
 ```
-php artisan sail:install
+php artisan storage:link
 ```
 ```
 npm run dev
