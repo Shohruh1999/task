@@ -14,7 +14,7 @@ Bu loyiha client va menejerni bir biriga bog'laydi. Loyiha Quyidagi qismlardan t
 git clone https://github.com/Shohruh1999/task.git
 ```
 ```
-composer intall 
+composer install 
 ```
 ```or```
 ```
